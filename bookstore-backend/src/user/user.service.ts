@@ -25,7 +25,6 @@ export class UserService {
       .orWhere('email = :email', { email })
       .orWhere('tel = :tel', { tel })
       .execute();
-    console.log(user);
     if (user.length >= 1)
       throw new HttpException(
         'Email/Tel/Username already exist',
