@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from './user/entities/user.entity';
 import { CategoryModule } from './category/category.module';
+import { Category } from './category/entities/category.entity';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,8 +23,8 @@ import { CategoryModule } from './category/category.module';
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [User],
-        synchronize: true,
+        entities: [User, Category],
+        synchronize: process.env.NODE_ENV != 'production',
       }),
       inject: [ConfigService],
     }),
